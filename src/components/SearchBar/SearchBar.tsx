@@ -23,7 +23,7 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
         </a>
         <form action={handleAction} className={styles.form}>
           <input className={styles.input} type="text" name="query" autoComplete="off" placeholder="Search movies..." autoFocus />
-          <button className={styles.button} type="submit">Search</button>
+          <button className={styles.button} type="submit">Знайти фільм</button>
         </form>
       </div>
     </header>

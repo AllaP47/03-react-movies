@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import SearchBar from './components/SearchBar/SearchBar';
-import MovieGrid from './components/MovieGrid/MovieGrid';
+import MovieList from './components/MovieGrid/MovieList';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import MovieModal from './components/MovieModal/MovieModal';
@@ -39,34 +39,29 @@ const App = () => {
     }
   };
 
-  return (
-    <div>
-      <Toaster position="top-right" reverseOrder={false} />
+ return (
+  <div>
+    <Toaster position="top-right" reverseOrder={false} />
+    <SearchBar onSubmit={handleSearch} />
+
+    <main>
+      {isError && <ErrorMessage />}
+      {isLoading && <Loader />}
+
       
-      <SearchBar onSubmit={handleSearch} />
-
-      <main>
-     
-        {isError && <ErrorMessage />}
-
-       
-        {isLoading && <Loader />}
-
-       
-        {movies.length > 0 && !isLoading && (
-          <MovieGrid movies={movies} onSelect={setSelectedMovie} />
-        )}
-      </main>
-
-     
-      {selectedMovie && (
-        <MovieModal 
-          movie={selectedMovie} 
-          onClose={() => setSelectedMovie(null)} 
-        />
+      {movies.length > 0 && !isLoading && (
+        <MovieList movies={movies} onSelect={setSelectedMovie} />
       )}
-    </div>
-  );
+    </main>
+
+    {selectedMovie && (
+      <MovieModal 
+        movie={selectedMovie} 
+        onClose={() => setSelectedMovie(null)} 
+      />
+    )}
+  </div>
+);
 };
 
 export default App;
