@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast'; 
 import SearchBar from '../SearchBar/SearchBar';
-import MovieList from '../MovieGrid/MovieGrid';
+import MovieGrid from '../MovieGrid/MovieGrid';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import MovieModal from '../MovieModal/MovieModal';
@@ -42,7 +42,7 @@ const App = () => {
         {isError && <ErrorMessage />}
         {isLoading && <Loader />}
         {movies.length > 0 && !isLoading && (
-          <MovieList movies={movies} onSelect={setSelectedMovie} />
+          <MovieGrid movies={movies} onSelect={setSelectedMovie} />
         )}
       </main>
       {selectedMovie && (
