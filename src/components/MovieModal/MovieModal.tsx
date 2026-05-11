@@ -25,7 +25,11 @@ const MovieModal = ({ movie, onClose }: MovieModalProps) => {
     <div className={styles.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={onClose}>&times;</button>
-        <img className={styles.image} src={`https://tmdb.org{movie.backdrop_path}`} alt={movie.title} />
+ <img 
+  className={styles.image} 
+  src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} 
+  alt={movie.title} 
+/>
         <div className={styles.content}>
           <h2>{movie.title}</h2>
           <p>{movie.overview}</p>

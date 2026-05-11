@@ -10,19 +10,15 @@ const MovieList = ({ movies, onSelect }: MovieListProps) => {
   return (
     <ul className={styles.grid}>
       {movies.map((movie) => {
-        // Формуємо ПРАВИЛЬНУ адресу: домен image + розмір w500 + шлях файлу
+        
         const finalUrl = movie.poster_path 
-          ? "https://tmdb.org" + movie.poster_path 
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
           : "https://placeholder.com";
 
         return (
           <li key={movie.id} onClick={() => onSelect(movie)}>
             <div className={styles.card}>
-              <img
-                className={styles.image}
-                src={finalUrl}
-                alt={movie.title}
-              />
+              <img className={styles.image} src={finalUrl} alt={movie.title} />
               <h2 className={styles.title}>{movie.title}</h2>
             </div>
           </li>
@@ -33,7 +29,6 @@ const MovieList = ({ movies, onSelect }: MovieListProps) => {
 };
 
 export default MovieList;
-
 
 
 

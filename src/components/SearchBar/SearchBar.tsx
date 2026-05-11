@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
@@ -8,11 +8,9 @@ interface SearchBarProps {
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const handleAction = (formData: FormData) => {
     const query = formData.get('query') as string;
-    if (!query.trim()) {
-      toast.error('Please enter your search query.');
-      return;
+    if (query?.trim()) {
+      onSubmit(query.trim());
     }
-    onSubmit(query.trim());
   };
 
   return (
@@ -21,9 +19,32 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
         <a className={styles.link} href="https://themoviedb.org" target="_blank" rel="noopener noreferrer">
           Powered by TMDB
         </a>
+
+        {/* Цей блок тримає віконце в центрі */}
+        <div className={styles.toastWrapper}>
+          <Toaster 
+            containerStyle={{ 
+              position: 'relative', 
+              inset: '0px' 
+            }} 
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: '#fff',
+                color: '#ff4d4d',
+                border: '1px solid #ff4d4d',
+                fontSize: '14px',
+                padding: '8px',
+                width: '220px',
+                boxShadow: 'none' 
+              },
+            }} 
+          />
+        </div>
+
         <form action={handleAction} className={styles.form}>
-          <input className={styles.input} type="text" name="query" autoComplete="off" placeholder="Search movies..." autoFocus />
-          <button className={styles.button} type="submit">Знайти фільм</button>
+          <input className={styles.input} type="text" name="query" placeholder="Search movies..." />
+          <button className={styles.button} type="submit">Search</button>
         </form>
       </div>
     </header>
@@ -31,3 +52,4 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
 };
 
 export default SearchBar;
+
