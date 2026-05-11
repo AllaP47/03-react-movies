@@ -6,7 +6,7 @@ interface MovieGridProps {
   onSelect: (movie: Movie) => void;
 }
 
-const MovieList = ({ movies, onSelect }: MovieGridProps) => {
+const MovieGrid = ({ movies, onSelect }: MovieGridProps) => {
   return (
     <ul className={styles.grid}>
       {movies.map((movie) => {
@@ -28,7 +28,7 @@ const MovieList = ({ movies, onSelect }: MovieGridProps) => {
   );
 };
 
-export default MovieList;
+export default MovieGrid;
 
 
 
