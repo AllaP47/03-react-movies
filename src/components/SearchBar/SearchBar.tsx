@@ -1,4 +1,4 @@
-import { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast'; // Додали імпорт toast
 import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
@@ -8,9 +8,14 @@ interface SearchBarProps {
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const handleAction = (formData: FormData) => {
     const query = formData.get('query') as string;
-    if (query?.trim()) {
-      onSubmit(query.trim());
+    
+    // Перевірка на порожній запит
+    if (!query || !query.trim()) {
+      toast.error('Будь ласка, введіть назву фільму для пошуку'); // Тепер виклик є!
+      return;
     }
+
+    onSubmit(query.trim());
   };
 
   return (
@@ -20,13 +25,9 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
           Powered by TMDB
         </a>
 
-        {/* Цей блок тримає віконце в центрі */}
         <div className={styles.toastWrapper}>
           <Toaster 
-            containerStyle={{ 
-              position: 'relative', 
-              inset: '0px' 
-            }} 
+            containerStyle={{ position: 'relative', inset: '0px' }} 
             toastOptions={{
               duration: 3000,
               style: {
@@ -35,15 +36,19 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
                 border: '1px solid #ff4d4d',
                 fontSize: '14px',
                 padding: '8px',
-                width: '220px',
-                boxShadow: 'none' 
+                width: '250px',
               },
             }} 
           />
         </div>
 
         <form action={handleAction} className={styles.form}>
-          <input className={styles.input} type="text" name="query" placeholder="Search movies..." />
+          <input 
+            className={styles.input} 
+            type="text" 
+            name="query" 
+            placeholder="Search movies..." 
+          />
           <button className={styles.button} type="submit">Search</button>
         </form>
       </div>
@@ -52,4 +57,5 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
 };
 
 export default SearchBar;
+
 

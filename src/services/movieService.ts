@@ -1,5 +1,12 @@
 import axios from "axios";
-import type { TmdbResponse } from "../types/movie";
+import type { Movie } from "../types/movie";
+
+export interface TmdbResponse {
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+  page: number;
+}
 
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
@@ -15,7 +22,6 @@ export const fetchMovies = async (query: string): Promise<TmdbResponse> => {
     },
     headers: {
       accept: "application/json",
-
       Authorization: `Bearer ${TOKEN}`,
     },
   };
